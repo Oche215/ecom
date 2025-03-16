@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+    <!-- Header-->
+    <header class="bg-dark py-2">
+        <div class="container px-4 px-lg-5 my-4">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Product Details</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Learn more of our <strong style="color: red;">&aleph;-Shop - {{ product.name }}</strong> special. </p>
+            </div>
+        </div>
+    </header>
+    <!-- Section -->
+     <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5 justify-content-center">
+                    <div class="card-transparent mb-4" >
+                      <div class="row g-0">
+                        <div class="col-md-4">
+                            {% if product.is_sale %}
+                             <!-- Sale badge-->
+                            <div class="">
+                                <div class="card h-100">
+                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem; align: center;">Sale</div>
+                                    <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="{{ product.name }}">
+                                </div>
+                            </div>
+                            {% else %}
+                            <div class="col">
+                                <div class="card h-100 bg-primary">
+                                    <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="{{ product.name }}">
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="container col-md-8" style="padding: 0 ; border: 1px solid grey; border-radius: 0 10px 10px 0; ">
+                          <div class="card-body">
+                            <h3 class="container card-title"><strong>{{ product.name }}</strong></h3>
+                              <hr style="margin: 2px 0; " >
+                            <p class="container card-text">{{ product.description }}.</p>
+
+                              <div class="col mb-4">
+                                  <div class="card-transparent h-100">
+                                      <!-- Sale badge-->
+                                      <!-- Product reviews-->
+                                       {% if product.is_sale %}
+                                      <div class="d-flex justify-content-center small text-warning mb-0">
+                                          <div class="bi-star-fill"></div>&nbsp;
+                                          <div class="bi-star-fill"></div>&nbsp;
+                                          <div class="bi-star-fill"></div>&nbsp;
+                                          <div class="bi-star-fill"></div>&nbsp;
+                                          <div class="bi-star-fill"></div>
+                                      </div>
+                                      <!-- Product price-->
+                                      <div class="text-center">
+                                          <h5><span class=" text-decoration-line-through" >${{ product.price }}</span>
+                                            <strong>${{ product.sale_price }}</strong></h5>
+                                      </div>
+
+                                      {% else %}
+
+
+                                          <div class="container text-center">
+                                              <h5 class="card-text text-center"><span class="text-body-secondary"><strong>Price: $ {{ product.price }}</strong></span></h5>
+
+                                          </div>
+
+                                      {% endif %}
+
+                                       <div class="container text-center">
+                                           <div class="row justify-content-center">
+                                               <div class="col-md-1">Quantity:</div>
+                                               <div class="col-md-1">
+                                                   <select id="qty-cart" class="form-select-sm">
+                                                       <option value="1">1</option>
+                                                       <option value="2">2</option>
+                                                       <option value="3">3</option>
+                                                       <option value="4">4</option>
+                                                       <option value="5">5</option>
+                                                   </select>
+                                               </div>
+                                           </div>
+                                           <br>
+                                           <a class="btn btn-outline-dark mt-auto" href="{% url 'home' %}">Home</a>
+                                            <button type="button" class="btn btn-warning" value="{{ product.id }}" id="add-cart">Add to Cart</button>
+                                           <button type="button" class="btn btn-info update-cart" value="{{ product.id }}" data-index="{{ product.id }}" >Update Cart</button>
+
+                                       </div>
+                                    </div>
+                              </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+            </div>
+     </section>
+<script>
+    // check if button Add to Cart is pressed
+    $(document).on('click', '#add-cart', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '{% url "cart_add" %}',
+            data: {
+                product_id: $('#add-cart').val(),
+                product_qty: $('#qty-cart option:selected').text(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
+                },
+            success: function(json){
+                //console.log(json),
+                document.getElementById("cart_qty").textContent = json.qty
+                location.reload();
+
+                },
+                error: function(xhr, errmsg, err){
+                }
+        });
+    })
+
+</script>
+
+<script>
+     // check if update button Add to Cart is pressed
+    $(document).on('click', '.update-cart', function(e){
+        e.preventDefault();
+        var productid = $(this).data('index');
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "cart_update" %}',
+            data: {
+                product_id: productid,
+                product_qty: $('#qty-cart option:selected').text(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
+                },
+            success: function(json){
+                //console.log(json),
+                //document.getElementById("cart_qty").textContent = json.qty
+                location.reload();
+
+                },
+                error: function(xhr, errmsg, err){
+                }
+        });
+    })
+
+
+</script>
+
+
+{% endblock %}

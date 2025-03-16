@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load mathfilters %}
+{% load static %}
+{% block content %}
+    <!-- Header-->
+    <header class="bg-dark py-2">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Product Categories</h1>
+                <p class="lead fw-normal text-white-50 mb-0"><strong style="color: red;"><i class="bi bi-tags"></i> </strong>Category Summary</p>
+            </div>
+        </div>
+    </header>
+<!-- Section-->
+        <section class="py-5">
+            <div class="container py-5">
+                 {% for object in object_list %}
+            <div class="container col-md-7">
+
+
+                    <ul class="list-group">
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                           {% for category in categories %}
+                          {% if category.id == object.category%}
+                          <h5 class="fw-bold"> <a class="text-decoration-none " href="{% url 'category' category %}">{{ category }}</a></h5>
+                          {% endif %}
+                          {% endfor%}
+                          <span class="badge bg-primary rounded-pill">{{ object.category_count }}</span>
+                      </li>
+                    </ul>
+
+
+
+            </div>
+                 {% endfor %}
+            </div>
+
+        </section>
+
+    {% endblock %}
+<!-- Footer-->
+

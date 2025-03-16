@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+    <!-- Header-->
+    <header class="bg-dark py-2">
+        <div class="container px-4 px-lg-5 my-4">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Update User Profile</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Profile: <strong style="color: red">{{ user.first_name }} {{user.last_name}}</strong></p>
+            </div>
+        </div>
+    </header>
+<!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5 col-md-6">
+                <form method="POST" action="{% url 'update_user' %}">{% csrf_token %}
+                    {{ user_form.as_p }}
+                    <br>
+
+                    <button type="submit" class="btn btn-primary">
+                        Update Profile
+                    </button>
+
+                </form>
+                <br>
+                <hr>
+                <a href="{% url 'update_password' %}" class="btn btn-danger">Change Password</a> <a href="{% url 'profile' user.pk %}" class="btn btn-success">User Profile</a>
+
+            </div>
+        </section>
+    {% endblock %}
+<!-- Footer-->
+

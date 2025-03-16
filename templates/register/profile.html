@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+    <!-- Header-->
+    <header class="bg-dark py-2">
+        <div class="container px-4 px-lg-5 my-4">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Update Profile</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Profile: <strong style="color: red">{{ user.username }} {{user.last_name}}</strong></p>
+            </div>
+        </div>
+    </header>
+<!-- Section-->
+    <section class="py-1">
+        <div class="container px-4 px-lg-5 mt-5 col-md-6">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'profile' user.pk %}">User Information</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-decoration-none" href="{% url 'profile_info' user.pk %}">Profile Info</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+
+        </div>
+    </section>
+
+        <section class="py-1">
+            <div class="container px-4 px-lg-5 mt-5 col-md-6">
+                <h4>
+                    <strong><i class="bi bi-file-person-fill"></i> USER INFORMATION</strong>
+                </h4>
+
+                <p class="placeholder-wave">
+                <span class="placeholder col-12 " ></span>
+              </p>
+
+                <form class="row g-3">
+                  <div class="col-md-3">
+                    <label for="username" class="form-label">Username</label>
+                      <span class="form-control " id="username">{{  user.username }} </span>
+                  </div>
+                     <div class="col-md-5">
+                    <label for="email" class="form-label">Email</label>
+                      <span class="form-control" id="email">{{  user.email }} </span>
+                  </div>
+                    <div class="col-md-2">
+                    <label for="phone" class="form-label">User ID</label>
+                      <span class="form-control bg-dark text-white" id="phone">{{  user.id }} </span>
+                  </div>
+                    <div class="col-md-2">
+                    <label for="edit" class="form-label">Edit</label>
+                      <a id="edit" class="btn btn-warning" href="{% url 'update_user' %}"><i class="bi bi-file-person-fill"></i> User</a>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="fname" class="form-label">First Name</label>
+                      <span class="form-control" id="fname">{{ user.first_name }}</span>
+                  </div>
+                    <div class="col-md-6">
+                    <label for="lname" class="form-label">First Name</label>
+                      <span class="form-control" id="lname">{{ user.last_name }}</span>
+                  </div>
+                    <br>
+                </form>
+
+                <hr>
+                <br>
+                <h4>
+                    <strong><i class="bi bi-file-person-fill"></i>PROFILE INFORMATION</strong>
+                </h4>
+
+               <p class="placeholder-wave">
+                <span class="placeholder col-12"></span>
+              </p>
+
+
+              <form class="row g-3">
+                <div class="col-md-8">
+                  <label for="inputEmail4" class="form-label">Telephone</label>
+                  <span class="form-control " id="inputEmail4">{{ object.phone }}</span>
+                </div>
+                <div class="col-md-2">
+                  <label for="inputPassword4" class="form-label">Profile ID</label>
+                    <span class="form-control bg-dark text-white" id="inputPassword4">{{ object.id }}</span>
+                </div>
+                  <div class="col-md-2">
+                    <label for="edit1" class="form-label">Edit</label>
+                      <a id="edit1" class="btn btn-warning" href="{% url 'update_profile' %}"><i class="bi bi-file-person-fill"></i> Profile</a>
+                  </div>
+
+                <div class="col-12">
+                  <label for="inputAddress" class="form-label">Address</label>
+                    <span class="form-control " id="inputAddress" >{{ object.address1 }}</span>
+                </div>
+                <div class="col-6">
+                  <label for="inputAddress2" class="form-label">Address 2</label>
+                    <span class="form-control " id="inputAddress2" >{{ object.address2  }}</span>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="inputCity" class="form-label">City</label>
+                    <span class="form-control " id="inputCity">{{ object.city }}</span>
+                </div>
+                <div class="col-md-4">
+                  <label for="inputState" class="form-label">State</label>
+                  <span id="inputState" class="form-control ">
+                      {{ object.state }}
+                  </span>
+                </div>
+                <div class="col-md-2">
+                  <label for="inputZip" class="form-label ">Zip</label>
+                    <span class="form-control " id="inputZip">{{ object.zipcode }}</span>
+                </div>
+                <div class="col-md-6">
+                     <label class="form-label" for="country">Country</label>
+                    <span class="form-control " id="country">{{ object.country }}</span>
+                </div>
+
+              </form>
+
+                <hr>
+
+
+            </div>
+        </section>
+
+
+    {% endblock %}
+<!-- Footer-->
+

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load mathfilters %}
+{% load static %}
+{% block content %}
+    <!-- Header-->
+    <header class="bg-dark py-2">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Shopping Cart</h1>
+                <p class="lead fw-normal text-white-50 mb-0"><strong style="color: red;"><i class="bi bi-cart4"></i> </strong> Cart Summary</p>
+            </div>
+        </div>
+    </header>
+<!-- Section-->
+        <section class="py-5">
+            <div class="container">
+                <div class="container col-md-10 ">
+                <div class="card mb-2 bg-transparent" style="">
+                    <div class="row g-0">
+                        <div class="col-md-1">
+                          <div class="card-footer">
+                              <small class="text-body-secondary" ><a class="btn btn-primary btn-sm text-decoration-none" href="{% url 'home' %}"><strong><i class="bi bi-house"></i> Ho</strong></a></small>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="card-footer">
+                              <h6 class="text-body-secondary" ><strong>Item Description</strong> </h6>
+                          </div>
+                        </div>
+                        <div class="col-md-2" align="right">
+                          <div class="card-footer">
+                              <h6 class="text-body-secondary" ><strong>Unit Price</strong> </h6>
+                          </div>
+                        </div>
+                        <div class="col-md-2" align="right">
+                          <div class="card-footer">
+                              <h6 class="text-body-secondary" ><strong>Quantity</strong> </h6>
+                          </div>
+                        </div>
+                        <div class="col-md-2" align="right">
+                          <div class="card-footer">
+                              <h6 class="text-body-secondary" ><strong>Amount</strong> </h6>
+                          </div>
+                        </div>
+                        <div class="col-md-2" align="right">
+                          <div class="card-footer">
+                              <small class="text-body-secondary" ><a class="btn btn-primary btn-sm text-decoration-none" href="#"><strong><i class="bi bi-cart4"></i> CART</strong></a></small>
+                          </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card mb-2 bg-transparent" style="">
+                    {% if products %}
+                        {% for product in products %}
+                    <div class="row g-0">
+                        <div class="col-md-1 " >
+                            <div class="card-footer bg-transparent justify-content-left mb-0">
+                              <div class="d-flex justify-content-left mb-0">
+                                <img src="{{ product.image.url }}" class="img-fluid rounded-start h-75 " alt="{{ product.name }}">
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3  ">
+                          <div class="card-footer bg-transparent justify-content-left mb-0 ">
+                              <div class="d-flex justify-content-left mb-0 align-middle">
+                                  <h5 class="text-body-secondary " ><strong><a class="text-decoration-none blue" href="{% url 'product' product.pk %}">{{ product.name }}</a> </strong></h5>
+                              </div>
+                              <div class="d-flex justify-content-left small mb-0 ">
+                                {% if product.is_sale %}
+                                    <div class="d-flex justify-content-center small text-warning mb-0">
+                                          <div class="bi-star-fill"></div>&nbsp;
+                                          <div class="bi-star-fill"></div>&nbsp;
+                                          <div class="bi-star-fill"></div>&nbsp;
+                                          <div class="bi-star-fill"></div>&nbsp;
+                                          <div class="bi-star-fill"></div>
+                                    </div>
+                              {% else %}
+                              {% endif %}
+                              </div>
+                          </div>
+                        </div>
+                         <div class="col-md-2" align="right">
+                           <div class="card-footer bg-transparent justify-content-right mb-0 " align="right">
+                               {% if product.is_sale %}
+                               <span class=" text-decoration-line-through" >{{ product.price }}</span>
+                                            <strong>{{ product.sale_price }}</strong>
+                              {% else %}
+                                                <small class="text-body-secondary" ><strong>{{ product.price }}</strong> </small>
+                              {% endif %}
+
+                          </div>
+                        </div>
+                             {% for key, value in quantities.items %}
+                            {% if key == product.id|slugify %}
+                         <div class="col-md-2" align="right">
+                          <div class="card-footer bg-transparent justify-content-left mb-0 ">
+                              <small class="text-body-secondary" ><strong>
+
+
+                                    {{ value }}
+
+
+
+                              </strong> </small>
+                          </div>
+                        </div>
+
+                        <div class="col-md-2" align="right">
+                           <div class="card-footer bg-transparent justify-content-left mb-0 ">
+                               {% if product.is_sale %}
+                               <span class="text-body-secondary" ><strong>{{ value|mul:product.sale_price }}</strong> </span>
+                               {% else %}
+                               <span class="text-body-secondary" ><strong>{{ value|mul:product.price }}</strong> </span>
+                               {% endif %}
+                          </div>
+                        </div>
+
+                        <div class="col-md-2" align="right">
+                           <div class="card-footer bg-transparent justify-content-left mb-0 ">
+                              <button type="button" data-index="{{ product.id }}" class="btn btn-danger remove-cart small">Remove</button>
+                          </div>
+                        </div>
+
+
+                    </div>
+                        {% endif %}
+                         {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="card mb-2 bg-transparent" style="">
+                    <div class="row g-0">
+                        <div class="col-md-1">
+                          <div class="card-footer bg-transparent justify-content-left mb-0 ">
+                              <small class="text-body-secondary" ><strong></strong> </small>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="card-footer bg-transparent justify-content-left mb-0 ">
+
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="card-footer bg-transparent justify-content-left mb-0 ">
+
+                          </div>
+                        </div>
+                        <div class="col-md-2" align="right">
+                          <div class="card-footer bg-transparent justify-content-left mb-0 ">
+                              <h5 class="text-body-secondary" ><strong>TOTAL</strong> </h5>
+                          </div>
+                        </div>
+                        <div class="col-md-2" align="right">
+                          <div class="card-footer bg-transparent justify-content-left mb-0 ">
+                              <h5 class="text-body-secondary" ><strong>{{ totals }}</strong> </h5>
+                          </div>
+                        </div>
+                        <div class="col-md-2" align="right">
+                          <div class="card-footer bg-transparent justify-content-center mb-0 ">
+                              <small class="text-body-secondary" id="floating" ><strong><a class="btn btn-success " href="#"><i class="bi bi-credit-card-2-back-fill"> Checkout</i></a></strong> </small>
+
+                          </div>
+                        </div>
+
+                    </div>
+                </div>
+                    </div>
+
+            </div>
+
+        </section>
+    <script>
+     // check if update button Add to Cart is pressed
+    $(document).on('click', '.remove-cart', function(e){
+        e.preventDefault();
+        var productid = $(this).data('index');
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "cart_delete" %}',
+            data: {
+                product_id: productid,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
+                },
+            success: function(json){
+                //console.log(json),
+                //document.getElementById("cart_qty").textContent = json.qty
+                location.reload();
+
+                },
+                error: function(xhr, errmsg, err){
+                }
+        });
+    })
+
+
+</script>
+
+    {% endblock %}
+<!-- Footer-->
+
