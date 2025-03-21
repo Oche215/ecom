@@ -36,13 +36,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-j$3=%^=gx@-*m8)2pz&pn*w_p3+hj1y^b=sh-@a1o%a0ap^x5m'
+SECRET_KEY = os.environ.get('SECRET_KEY')
+#'django-insecure-j$3=%^=gx@-*m8)2pz&pn*w_p3+hj1y^b=sh-@a1o%a0ap^x5m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['aleph-shop-production.up.railway.app', 'https://aleph-shop-production.up.railway.app', '127.0.0.1' ]
-CSRF_TRUSTED_ORIGINS = ['https://aleph-shop-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://aleph-shop-production.up.railway.app', 'https://127.0.0.1']
 
 
 # Application definition
