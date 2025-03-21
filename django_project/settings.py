@@ -42,7 +42,7 @@ SECRET_KEY = 'django-insecure-j$3=%^=gx@-*m8)2pz&pn*w_p3+hj1y^b=sh-@a1o%a0ap^x5m
 DEBUG = True
 
 ALLOWED_HOSTS = ['aleph-shop-production.up.railway.app', 'https://aleph-shop-production.up.railway.app', '127.0.0.1' ]
-CSRF_TRUSTED_ORIGINS = ['aleph-shop-production.up.railway.app', 'https://aleph-shop-production.up.railway.app', '127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://aleph-shop-production.up.railway.app']
 
 
 # Application definition
