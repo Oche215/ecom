@@ -16,3 +16,11 @@ class ShippingAddressForm(forms.ModelForm):
         fields = ['Shipping_full_name', 'Shipping_email', 'Shipping_address1', 'Shipping_address2', 'Shipping_city', 'Shipping_state', 'Shipping_zipcode', 'Shipping_country', ]
 
         exclude = ['user',]
+
+
+class PaymentForm(forms.Form):
+    card_name = forms.CharField(label="", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Card Name'}), required=True)
+    card_number = forms.CharField(label="", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Card Number'}), required=True)
+    card_exp = forms.CharField(label="", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Card Expiry Date'}), required=True)
+    card_cvv = forms.CharField(label="", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Card CVV'}), required=True)
+    card_type = forms.CharField(label="", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Card Type'}), required=True)

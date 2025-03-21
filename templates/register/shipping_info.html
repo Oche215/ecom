@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+    <!-- Header-->
+    <header class="bg-dark py-2">
+        <div class="container px-4 px-lg-5 my-4">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Update Profile</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Profile: <strong style="color: red">{{ user.username }} {{user.last_name}}</strong></p>
+            </div>
+        </div>
+    </header>
+<!-- Section-->
+    <section class="py-1">
+        <div class="container px-4 px-lg-5 mt-5 col-md-6">
+            <ul class="nav nav-tabs">
+                <li class="nav-item hover-overlay hover-zoom hover-shadow ripple">
+                    <a class="nav-link active hover-outline-dark bg-transparent" href="{% url 'profile' user.pk %}">User Information</a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active bg-transparent"  href="{% url 'profile_info' user.id %}">Profile Information</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active btn btn-outline-dark" aria-current="page" href="{% url 'shipping_info' user.pk %}"><strong>Shipping Information</strong></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+        <section class="py-1">
+            <div class="container px-2 px-lg-5 mt-5 col-md-6">
+
+              <form class="row g-2">
+                <div class="col-md-8">
+                  <label for="inputEmail4" class="form-label">Full Name</label>
+                  <span class="form-control " id="inputEmail4">{{ shipping_user.Shipping_full_name }}</span>
+                </div>
+                <div class="col-md-2">
+                  <label for="inputPassword4" class="form-label">Shipping ID</label>
+                    <span class="form-control bg-dark text-white" id="inputPassword4">{{ shipping_user.id }}</span>
+                </div>
+                  <div class="col-md-2">
+                    <label for="edit1" class="form-label">Edit</label>
+                      <a id="edit1" class="btn btn-outline-dark" href="{% url 'update_profile' %}"><i class="bi bi-file-person-fill"></i> Profile</a>
+                  </div>
+
+                <div class="col-8">
+                  <label for="inputAddress" class="form-label">Address</label>
+                    <span class="form-control " id="inputAddress" >{{ shipping_user.Shipping_address1 }}</span>
+                </div>
+                  <div class="col-md-4">
+                  <label for="shippingemail" class="form-label">Email Address</label>
+                  <span class="form-control " id="shippingemail">{{ shipping_user.Shipping_email }}</span>
+                </div>
+                <div class="col-6">
+                  <label for="inputAddress2" class="form-label">Address 2</label>
+                    <span class="form-control " id="inputAddress2" >{{ shipping_user.Shipping_address2  }}</span>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="inputCity" class="form-label">City</label>
+                    <span class="form-control " id="inputCity">{{ shipping_user.Shipping_city }}</span>
+                </div>
+                <div class="col-md-4">
+                  <label for="inputState" class="form-label">State</label>
+                  <span id="inputState" class="form-control ">
+                      {{ shipping_user.Shipping_state }}
+                  </span>
+                </div>
+                <div class="col-md-2">
+                  <label for="inputZip" class="form-label ">Zip</label>
+                    <span class="form-control " id="inputZip">{{ shipping_user.Shipping_zipcode }}</span>
+                </div>
+                <div class="col-md-6">
+                     <label class="form-label" for="country">Country</label>
+                    <span class="form-control " id="country">{{ shipping_user.Shipping_country }}</span>
+                </div>
+
+
+              </form>
+                <br>
+                <p class="placeholder-wave">
+                <span class="placeholder col-12"></span>
+              </p>
+
+            </div>
+            <br>
+
+        </section>
+
+
+    {% endblock %}
+<!-- Footer-->
+

@@ -1,0 +1,8 @@
+body {
+    background-image: url("/static/assets/white-unsplash.jpg");
+    background-repeat: no-repeat;
+    width: 100%;
+    /*background-color: #19232D;
+    color: #FAFAFA;*/
+    /*margin: 0px 25px 15px 25px;*/
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load mathfilters %}
+{% load static %}
+{% block content %}
+    <!-- Header-->
+    <header class="bg-dark py-2">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Shipped Dashboard</h1>
+                <p class="lead fw-normal text-white-50 mb-0"><strong style="color: red;"><i class="bi bi-truck"></i> </strong>Payments...</p>
+            </div>
+        </div>
+    </header>
+<!-- Section-->
+        <section class="py-5">
+            <div class="container col-md-8">
+                <table class="table table-striped table-hover border-secondary rounded-2">
+                    <thead class="table-dark rounded-2">
+                        <tr>
+                            <th scope="col">Order #</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Customer</th>
+                             <th scope="col">Email</th>
+                            <th scope="col">Date Ordered</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in orders %}
+                        <tr>
+                            <td><a href="{% url 'orders' item.id %}" class="text-decoration-none bg-secondary text-info ms-1 rounded-pill"> &nbsp;Order - {{ item.id }}&nbsp; </a></td>
+                            <td>{{item.amount}}</td>
+                            <td>{{item.full_name}}</td>
+                            <td>{{item.email}}</td>
+                            <td>{{item.date_ordered}}</td>
+                            <td>
+                                <form method="POST">{% csrf_token %}
+                                    <input type="hidden" name="shipping_status" value="false">
+                                    <input type="hidden" name="num" value="{{item.id}}" >
+
+                                    <button type="submit" class="btn btn-sm btn-danger"><small>Mark UnShipped</small></button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+
+
+            </div>
+
+
+
+        </section>
+
+    {% endblock %}
+<!-- Footer-->
+

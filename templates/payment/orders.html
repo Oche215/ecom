@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load mathfilters %}
+{% load static %}
+{% block content %}
+    <!-- Header-->
+    <header class="bg-dark py-1">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Orders</h1>
+                <p class="lead fw-normal text-white-50 mb-0"><strong style="color: red;"><i class="bi bi-tags"></i> </strong>{{ order }} Detail...</p>
+            </div>
+        </div>
+    </header>
+    <div class="py-1">
+                    <div class="container col-md-4">
+                        <div class="card mb-2 bg-transparent" style="">
+                            <div class="row">
+                                <div class="col-md-6 " >
+                                <div class="card-footer bg-transparent justify-content-left mb-0">
+                                  <div class="d-flex justify-content-left mb-0">
+                                      <a class="btn btn-outline-primary bg-secondary" href="{% url 'shipped_dash' %}">Shipped <i class="bi bi-truck"></i></a>
+                                  </div>
+                                </div>
+                            </div>
+                                <div class="col-md-6 " >
+                                <div class="card-footer bg-transparent justify-content-left mb-0" >
+                                  <div class="justify-content-left mb-0" align="right">
+                                      <a class="btn btn-outline-primary bg-danger " href="{% url 'not_shipped_dash' %}" style="--bs-bg-opacity: 1">Unshipped <i class="bi bi-truck-flatbed"></i></a>
+
+                                  </div>
+                                </div>
+                            </div>
+
+                            </div>
+                        </div>
+                    </div>
+</div>
+<!-- Section-->
+        <section class="py-3">
+            <div class="container col-md-4">
+                <div class="card mb-2 bg-transparent" style="">
+
+                    <div class="row g-0">
+                        <div class="col-md-12 " >
+                            <div class="card-footer justify-content-left mb-0">
+                              <div class="d-flex justify-content-left mb-0">
+                               <span class="text-body-secondary" ><strong>{{ order }}</strong> </span>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-0">
+                        <div class="col-md-5 " >
+                            <div class="card-footer bg-transparent justify-content-left mb-0">
+                              <div class="d-flex justify-content-left mb-0">
+                                  <span class="text-body-secondary" ><strong>Email: </strong> </span>
+
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 " >
+                            <div class="card-footer bg-transparent justify-content-left mb-0">
+                              <div class="d-flex justify-content-left mb-0">
+                                  <span class="text-body-secondary" >{{ order.email }}</span>
+
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-0">
+                        <div class="col-md-5 " >
+                            <div class="card-footer bg-transparent justify-content-left mb-0">
+                              <div class="d-flex justify-content-left mb-0">
+                                  <span class="text-body-secondary" ><strong>Date Ordered: </strong> </span>
+
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 " >
+                            <div class="card-footer bg-transparent justify-content-left mb-0">
+                              <div class="d-flex justify-content-left mb-0">
+                                  <span class="text-body-secondary" >{{ order.date_ordered }}</span>
+
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-0">
+                        <div class="col-md-5 " >
+                            <div class="card-footer bg-transparent justify-content-left mb-0">
+                              <div class="d-flex justify-content-left mb-0">
+                                  <span class="text-body-secondary" ><strong>Date Shipped: </strong> </span>
+
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 " >
+                            <div class="card-footer bg-transparent justify-content-left mb-0">
+                              <div class="d-flex justify-content-left mb-0">{% if order.date_shipped == None %}
+                                  <span class="text-body-secondary text-warning" >Pending</span>
+                                  {% else %}
+                                  <span class="text-body-secondary" >{{ order.date_shipped }}</span>
+                                    {% endif %}
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-0">
+                        <div class="col-md-5 " >
+                            <div class="card-footer bg-transparent justify-content-left mb-0">
+                              <div class="d-flex justify-content-left mb-0">
+                                  <span class="text-body-secondary" ><strong>Recipient: </strong> </span>
+
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 " >
+                            <div class="card-footer bg-transparent justify-content-left mb-0">
+                              <div class="d-flex justify-content-left mb-0">
+                                  <span class="text-body-secondary " >{{order.full_name}}</span>
+
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-0">
+                        <div class="col-md-5 " >
+                            <div class="card-footer bg-transparent justify-content-left mb-0">
+                              <div class="d-flex justify-content-left mb-0">
+                                  <span class="text-body-secondary" ><strong>Items: </strong> </span>
+
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 " >
+                            <div class="card-footer bg-transparent justify-content-left mb-0">
+                              <div class="justify-content-left mb-0">
+                                  {% for item in items %}
+                                  <small class="text-body-secondary" >{{ item.product }} - {{ item.quantity }} - ${{ item.price }}</small><br>
+                                    {% endfor %}
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-0">
+                        <div class="col-md-5 " >
+                            <div class="card-footer bg-transparent justify-content-left mb-0">
+                              <div class="d-flex justify-content-left mb-0">
+                                  <span class="text-body-secondary" ><strong>Shipping Address: </strong> </span>
+
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 " >
+                            <div class="card-footer bg-transparent justify-content-left mb-0">
+                              <div class="d-flex justify-content-left mb-0">
+                                  <span class="text-body-secondary" >{{ order.Shipping_address }}</span>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-0">
+                    <div class="col-md-6" >
+                            <div class="card-footer justify-content-right mb-0">
+                                 <small class="text-body-secondary"><strong> Amount: </strong></small>
+
+                            </div>
+                        </div>
+                    <div class="col-md-6" align="right">
+                            <div class="card-footer justify-content-right mb-0">
+                               <span class="text-body-secondary"><strong> $ {{ order.amount }}</strong> </span>
+
+                            </div>
+                        </div>
+                        </div>
+                </div>
+
+                <form method="POST">{% csrf_token %}
+                    {% if not order.shipped %}
+                    <input type="hidden" name="shipping_status" value="true">
+                    <button type="submit" class="btn btn-sm btn-success" style="width: 100px;">Mark As Shipped</button>
+                     {% else %}
+                    <input type="hidden" name="shipping_status" value="false">
+                    <button type="submit" class="btn btn-sm btn-danger" style="width: 100px;">Mark As Not-Shipped</button>
+                     {% endif %}
+                </form>
+
+            </div>
+
+
+
+        </section>
+
+
+    {% endblock %}
+<!-- Footer-->
+
