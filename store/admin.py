@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from django.template.defaultfilters import first
 
+from payment.models import ShippingAddress
 from store.models import Category, Customer, Product, Order, UserProfile
 
 # Register your models here.
@@ -10,6 +11,7 @@ admin.site.register(Customer)
 admin.site.register(Product)
 admin.site.register(Order)
 admin.site.register(UserProfile)
+
 
 #merge UserProfile and User info
 class ProfileInLine(admin.StackedInline):

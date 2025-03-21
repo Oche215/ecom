@@ -21,10 +21,10 @@
 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'profile_info' user.pk %}">Profile Info</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'profile_info' user.pk %}"><strong>Profile Information</strong></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link active bg-transparent" href="{% url 'shipping_info' user.pk %}">Shipping Information</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
@@ -37,23 +37,15 @@
         <section class="py-1">
             <div class="container px-4 px-lg-5 mt-5 col-md-6">
 
-                <h4>
-                    <strong><i class="bi bi-file-person-fill"></i>PROFILE INFORMATION</strong>
-                </h4>
-
-               <p class="placeholder-wave">
-                <span class="placeholder col-12"></span>
-              </p>
-
-
               <form class="row g-3">
                 <div class="col-md-8">
+                    {% for user in current_user %}
                   <label for="inputEmail4" class="form-label">Telephone</label>
-                  <span class="form-control " id="inputEmail4">{{ object.phone }}</span>
+                  <span class="form-control " id="inputEmail4">{{ user.phone }}</span>
                 </div>
                 <div class="col-md-2">
                   <label for="inputPassword4" class="form-label">Profile ID</label>
-                    <span class="form-control bg-dark text-white" id="inputPassword4">{{ object.id }}</span>
+                    <span class="form-control bg-dark text-white" id="inputPassword4">{{ user.id }}</span>
                 </div>
                   <div class="col-md-2">
                     <label for="edit1" class="form-label">Edit</label>
@@ -62,31 +54,32 @@
 
                 <div class="col-12">
                   <label for="inputAddress" class="form-label">Address</label>
-                    <span class="form-control " id="inputAddress" >{{ object.address1 }}</span>
+                    <span class="form-control " id="inputAddress" >{{ user.address1 }}</span>
                 </div>
                 <div class="col-6">
                   <label for="inputAddress2" class="form-label">Address 2</label>
-                    <span class="form-control " id="inputAddress2" >{{ object.address2  }}</span>
+                    <span class="form-control " id="inputAddress2" >{{ user.address2  }}</span>
                 </div>
 
                 <div class="col-md-6">
                   <label for="inputCity" class="form-label">City</label>
-                    <span class="form-control " id="inputCity">{{ object.city }}</span>
+                    <span class="form-control " id="inputCity">{{ user.city }}</span>
                 </div>
                 <div class="col-md-4">
                   <label for="inputState" class="form-label">State</label>
                   <span id="inputState" class="form-control ">
-                      {{ object.state }}
+                      {{ user.state }}
                   </span>
                 </div>
                 <div class="col-md-2">
                   <label for="inputZip" class="form-label ">Zip</label>
-                    <span class="form-control " id="inputZip">{{ object.zipcode }}</span>
+                    <span class="form-control " id="inputZip">{{ user.zipcode }}</span>
                 </div>
                 <div class="col-md-6">
                      <label class="form-label" for="country">Country</label>
-                    <span class="form-control " id="country">{{ object.country }}</span>
+                    <span class="form-control " id="country">{{ user.country }}</span>
                 </div>
+                  {% endfor %}
 
               </form>
 

@@ -1,5 +1,6 @@
 from django.contrib.auth import logout, login, authenticate
 from django.shortcuts import render, redirect
+from django.template.context_processors import request
 
 from django.views.generic import DetailView
 
@@ -170,10 +171,55 @@ def update_profile(request):
         return redirect('home')
 
 class UserDetail(DetailView):
-    model = UserProfile
+    model = User
     template_name = 'register/profile.html'
+
+
+def profile(request, pk):
+    user = request.user
+    if request.user.is_authenticated:
+        current_user = UserProfile.objects.get(user__id=request.user.id)
+        shipping_user = ShippingAddress.objects.get(user__id=current_user.id)
+
+        return render(request, 'register/profile.html', {'current_user': current_user, 'shipping_user': shipping_user, 'user':user })
+
+    else:
+        messages.success(request, 'You are not allowed to visit this page')
+        return redirect('home')
+
+
+def profile_info(request, pk):
+    user = request.user
+    if request.user.is_authenticated:
+        current_user = UserProfile.objects.filter(user__id=user.id)
+        shipping_user = ShippingAddress.objects.get(user__id=user.id)
+
+        return render(request, 'register/profile_info.html', {'current_user': current_user, 'shipping_user': shipping_user, 'user':user })
+
+    else:
+        messages.success(request, 'You are not allowed to visit this page')
+        return redirect('home')
+
+
+def shipping_info(request, pk):
+    user = request.user
+    if request.user.is_authenticated:
+        current_user = UserProfile.objects.filter(user__id=user.id)
+        shipping_user = ShippingAddress.objects.get(user__id=user.id)
+
+        return render(request, 'register/shipping_info.html', {'current_user': current_user, 'shipping_user': shipping_user, })
+
+    else:
+        messages.success(request, 'You are not allowed to visit this page')
+        return redirect('home')
 
 
 class UserDetail1(DetailView):
     model = UserProfile
     template_name = 'register/profile_info.html'
+
+
+class UserDetail2(DetailView):
+
+    model = ShippingAddress
+    template_name = 'register/shipping_info.html'

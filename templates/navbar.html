@@ -22,6 +22,19 @@
 
                             </ul>
                         </li>
+                        {% if user.is_superuser %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-file-person-fill"></i>Order Status</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                                <li><a class="dropdown-item" href="{% url 'shipped_dash' %}"><i class="bi bi-truck"></i> Shipped Orders</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+
+                                <li><a class="dropdown-item" href="{% url 'not_shipped_dash' %}"><i class="bi bi-truck-flatbed"></i> Unshipped Orders</a></li>
+
+
+                            </ul>
+                        </li>
+                        {% endif %}
                         {% else %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
                         {% endif %}

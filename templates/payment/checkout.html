@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load mathfilters %}
+{% load static %}
+{% block content %}
+    <!-- Header-->
+    <header class="bg-dark py-2">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Checkout</h1>
+                <p class="lead fw-normal text-white-50 mb-0"><strong style="color: red;"><i class="bi bi-tags"></i> </strong>Payments...</p>
+            </div>
+        </div>
+    </header>
+<!-- Section-->
+        <section class="py-5">
+            <div class="container col-md-3">
+                <div class="card mb-2 bg-transparent" style="">
+                    {% if products %}
+                    <div class="row g-0">
+                        <div class="col-md-12 " >
+                            <div class="card-footer justify-content-left mb-0">
+                              <div class="d-flex justify-content-left mb-0">
+                               <span class="text-body-secondary" ><strong>Order Summary</strong> </span>
+                              </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                        {% for product in products %}
+                    <div class="row g-0">
+
+                        <div class="col-md-8  ">
+                          <div class="card-footer bg-transparent justify-content-left mb-0 ">
+                              <div class="d-flex justify-content-left mb-0 align-middle">
+                                  <small class="text-body-secondary " >{{ product.name }}</small>
+                              </div>
+
+                          </div>
+                        </div>
+
+                             {% for key, value in quantities.items %}
+                            {% if key == product.id|slugify %}
+
+                        <div class="col-md-4" align="right">
+                           <div class="card-footer bg-transparent justify-content-left mb-0 ">
+                               {% if product.is_sale %}
+                               <span class="text-body-secondary" ><strong>{{ value|mul:product.sale_price }}</strong> </span>
+                               {% else %}
+                               <span class="text-body-secondary" ><strong>{{ value|mul:product.price }}</strong> </span>
+                               {% endif %}
+                          </div>
+                        </div>
+
+                    </div>
+                        {% endif %}
+                         {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                    <div class="row g-0">
+                    <div class="col-md-6" >
+                            <div class="card-footer justify-content-right mb-0">
+                                 <small class="text-body-secondary"><a type="button" href="{% url 'cart_summary' %}" class="btn btn-sm btn-outline-dark">Change Order</a></small>
+
+                            </div>
+                        </div>
+                    <div class="col-md-6" align="right">
+                            <div class="card-footer justify-content-right mb-0">
+                               <span class="text-body-secondary"><strong>TOTAL: $ {{ totals }}</strong> </span>
+
+                            </div>
+                        </div>
+                        </div>
+                </div>
+                <div class="card mb-2 bg-transparent" style="">
+
+                    <div class="row g-0">
+                        <div class="col-md-12 " >
+                            <div class="card-footer justify-content-left mb-0">
+                              <div class="d-flex justify-content-left mb-0">
+                               <span class="text-body-secondary" ><strong>Shipping Info</strong> </span>
+                              </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="col-md-12" >
+
+                            <div class="card-footer justify-content-right mb-0">
+                                <form method="POST" action="{% url 'billing' %}" class="">{% csrf_token %}
+
+                                {{ shipping_form.as_p }}
+
+                                    <button type="submit" class="btn btn-sm btn-outline-dark">Proceed to Billing</button>
+
+                                </form>
+
+
+                            </div>
+                        </div>
+                </div>
+
+
+
+            </div>
+
+
+
+        </section>
+
+    {% endblock %}
+<!-- Footer-->
+

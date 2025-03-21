@@ -12,18 +12,24 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-from tempfile import template
 
-from django.conf.global_settings import STATICFILES_DIRS, MEDIA_URL, MEDIA_ROOT
+import whitenoise.middleware
+from django.conf import STATICFILES_STORAGE_ALIAS
+from dotenv import load_dotenv
+
+
+from django.conf.global_settings import STATICFILES_DIRS, MEDIA_URL, MEDIA_ROOT, STATIC_ROOT, CSRF_TRUSTED_ORIGINS
 from django.conf.urls.static import static
 from django.template.context_processors import media
 
-import cart.apps
-import store.apps
-from payment.views import payment
+# from payment.views import payment
+# from store.models import UserProfile
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -36,6 +42,7 @@ SECRET_KEY = 'django-insecure-j$3=%^=gx@-*m8)2pz&pn*w_p3+hj1y^b=sh-@a1o%a0ap^x5m
 DEBUG = True
 
 ALLOWED_HOSTS = []
+CSRF_TRUSTED_ORIGINS = []
 
 
 # Application definition
@@ -49,9 +56,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'store.apps.StoreConfig',
     'cart.apps.CartConfig',
-    'payment',
+    'payment.apps.PaymentConfig',
 
     'mathfilters',
+    'whitenoise.runserver_nostatic',
 
 ]
 
@@ -63,6 +71,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'django_project.urls'
@@ -93,8 +102,15 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': os.environ.get('DB_PASSWORD_PG'),
+        'HOST': 'switchyard.proxy.rlwy.net',
+        'PORT': '47469',
+
     }
 }
 
@@ -135,6 +151,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFileStorage'
+STATIC_ROOT = (BASE_DIR / 'staticfiles')
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
