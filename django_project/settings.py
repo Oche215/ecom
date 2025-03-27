@@ -42,8 +42,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['aleph-shop-production.up.railway.app', 'https://aleph-shop-production.up.railway.app', '127.0.0.1', 'localhost' ]
-CSRF_TRUSTED_ORIGINS = ['https://aleph-shop-production.up.railway.app', 'https://127.0.0.1']
+ALLOWED_HOSTS = ['aleph-shop.up.railway.app', 'https://aleph-shop.up.railway.app', '127.0.0.1', 'localhost' ]
+CSRF_TRUSTED_ORIGINS = ['https://aleph-shop.up.railway.app', 'https://127.0.0.1']
 
 
 # Application definition
