@@ -50,7 +50,7 @@ def billing(request):
     if request.POST:
 
         cart = Cart(request)
-        products = cart.summary()
+        products = cart.summary
         quantities = cart.quantity
         totals = cart.cart_total()
 
