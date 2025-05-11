@@ -1,9 +1,10 @@
-from contextlib import nullcontext
+from locale import currency
 
 from django.shortcuts import render, redirect
 from django.template.context_processors import request
 
 from cart.cart import Cart
+from django_project.settings import PAYPAL_RECEIVER_EMAIL
 from store.models import UserProfile
 from .admin import OrderItemInline
 from .models import ShippingAddress, Order, OderItem
@@ -11,6 +12,13 @@ from .forms import ShippingAddressForm, PaymentForm
 from store.forms import UserProfileForm
 from django.contrib import messages
 import datetime
+
+from django.urls import reverse
+from django.shortcuts import render
+from paypal.standard.forms import PayPalPaymentsForm
+from django.conf import settings
+import uuid #unique user_id for duplicate orders
+
 
 # Create your views here.
 def payment(request):
@@ -49,16 +57,33 @@ def billing(request):
         my_shipping =request.POST
         request.session['my_shipping'] = my_shipping
 
+        host = request.get_host()
+        #paypal stuff
+        paypal_dict = {
+            'business': PAYPAL_RECEIVER_EMAIL,
+            'amount': totals,
+            'item_name': 'Confectionery Order',
+            'no_shipping': '2',
+            'invoice': str(uuid.uuid4()),
+            'currency_code': 'USD',
+            'notify_url': 'https://{}{}'.format(host, reverse('paypal-ipn')),
+            'return_url': 'https://{}{}'.format(host, reverse('payment_success')),
+            'cancel_return': 'https://{}{}'.format(host, reverse('payment_fail')),
+
+        }
+
+        paypal_form = PayPalPaymentsForm(initial=paypal_dict)
+
         if request.user.is_authenticated:
             shipping_form = request.POST
             billing_form = PaymentForm()
-            return render(request, 'payment/billing.html', {'products': products, 'quantities': quantities, 'totals': totals, 'shipping_form': shipping_form, 'billing_form': billing_form})
+            return render(request, 'payment/billing.html', {'paypal_form': paypal_form, 'products': products, 'quantities': quantities, 'totals': totals, 'shipping_form': shipping_form, 'billing_form': billing_form})
         else:
             shipping_form = request.POST
             billing_form = PaymentForm()
             return render(request, 'payment/billing.html',
                           {'products': products, 'quantities': quantities, 'totals': totals,
-                           'shipping_form': shipping_form, 'billing_form': billing_form})
+                           'shipping_form': shipping_form, 'billing_form': billing_form, 'paypal_form': paypal_form})
 
     else:
         messages.success(request, 'You do not have a valid cart.')
@@ -189,3 +214,10 @@ def orders(request, pk):
     else:
         messages.success(request, 'access denied')
         return redirect('home')
+
+
+def payment_success(request):
+    return render(request, 'payment/payment_success.html', {})
+
+def payment_failed(request):
+    return render(request, 'payment/payment_failed.html', {})

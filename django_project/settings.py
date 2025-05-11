@@ -42,7 +42,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['aleph-shopping.up.railway.app', 'https://aleph-shopping.up.railway.app', 'localhost', '127.0.0.1' ]
+ALLOWED_HOSTS = ['aleph-shopping.up.railway.app', 'https://aleph-shopping.up.railway.app', '127.0.0.1' ]
 CSRF_TRUSTED_ORIGINS = ['https://aleph-shopping.up.railway.app', 'https://127.0.0.1']
 
 
@@ -61,6 +61,7 @@ INSTALLED_APPS = [
 
     'mathfilters',
     'whitenoise.runserver_nostatic',
+    'paypal.standard.ipn',
 
 ]
 
@@ -165,3 +166,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#paypal settings
+PAYPAL_TEST = True
+PAYPAL_RECEIVER_EMAIL = 'merchant@lct.com' #business sandbox account
