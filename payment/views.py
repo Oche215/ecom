@@ -68,7 +68,7 @@ def billing(request):
             'currency_code': 'USD',
             'notify_url': 'https://{}{}'.format(host, reverse('paypal-ipn')),
             'return_url': 'https://{}{}'.format(host, reverse('payment_success')),
-            'cancel_return': 'https://{}{}'.format(host, reverse('payment_fail')),
+            'cancel_return': 'https://{}{}'.format(host, reverse('payment_failed')),
 
         }
 
