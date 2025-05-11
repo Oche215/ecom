@@ -114,44 +114,44 @@
                         </div>
                 </div>
                 <br><br>
-                    <center>
+                    <div class="container center">
                         {{ paypal_form.render }}
-                    </center>
-
-                    <br>
-                <div class="card mb-2 bg-transparent" style="">
-
-                    <div class="row g-0">
-                        <div class="col-md-12 " >
-                            <div class="card-footer justify-content-left mb-0">
-                              <div class="d-flex justify-content-left mb-0">
-                               <span class="text-body-secondary" ><strong>Billing Info</strong> </span>
-                              </div>
-                            </div>
-                        </div>
-
-
-
                     </div>
 
-                    <div class="col-md-12" >
+                    <br>
+<!--                <div class="card mb-2 bg-transparent" style="">-->
 
-                            <div class="card-footer bg-transparent justify-content-right mb-0">
-                                <form method="POST" action="{% url 'process_order' %}">{% csrf_token %}
+<!--                    <div class="row g-0">-->
+<!--                        <div class="col-md-12 " >-->
+<!--                            <div class="card-footer justify-content-left mb-0">-->
+<!--                              <div class="d-flex justify-content-left mb-0">-->
+<!--                               <span class="text-body-secondary" ><strong>Billing Info</strong> </span>-->
+<!--                              </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
 
 
-                                {{ billing_form.as_p }}
 
-                                    <div class="col-md-12" >
-                            <div class="card-footer justify-content-right mb-0">
-                                 <small><button class="btn btn-sm btn-outline-dark" type="submit" >Pay Now</button></small>
-                            </div>
-                        </div>
-                                    </form>
-                            </div>
-                        </div>
+<!--                    </div>-->
 
-                </div>
+<!--                    <div class="col-md-12" >-->
+
+<!--                            <div class="card-footer bg-transparent justify-content-right mb-0">-->
+<!--                                <form method="POST" action="{% url 'process_order' %}">{% csrf_token %}-->
+
+
+<!--                                {{ billing_form.as_p }}-->
+
+<!--                                    <div class="col-md-12" >-->
+<!--                            <div class="card-footer justify-content-right mb-0">-->
+<!--                                 <small><button class="btn btn-sm btn-outline-dark" type="submit" >Pay Now</button></small>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                                    </form>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                </div>-->
 
 
             </div>

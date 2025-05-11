@@ -267,6 +267,7 @@ def orders(request, pk):
 
 
 def payment_success(request):
+
     return render(request, 'payment/payment_success.html', {})
 
 def payment_failed(request):
