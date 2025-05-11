@@ -59,12 +59,14 @@ def billing(request):
 
         host = request.get_host()
         #paypal stuff
+        my_invoice = str(uuid.uuid4())
+
         paypal_dict = {
             'business': PAYPAL_RECEIVER_EMAIL,
             'amount': totals,
             'item_name': 'Confectionery Order',
             'no_shipping': '2',
-            'invoice': str(uuid.uuid4()),
+            'invoice': my_invoice,
             'currency_code': 'USD',
             'notify_url': 'https://{}{}'.format(host, reverse('paypal-ipn')),
             'return_url': 'https://{}{}'.format(host, reverse('payment_success')),
@@ -72,11 +74,59 @@ def billing(request):
 
         }
 
+        #create PayPal button
         paypal_form = PayPalPaymentsForm(initial=paypal_dict)
 
         if request.user.is_authenticated:
             shipping_form = request.POST
             billing_form = PaymentForm()
+
+            # create pre Order
+            payment_form = PaymentForm(request.POST or None)
+            # GEt shipping session stuff
+            my_shipping = request.session.get('my_shipping')
+            shipping_address = f"{my_shipping['Shipping_address1']}\n {my_shipping['Shipping_address2']}\n {my_shipping['Shipping_city']}\n {my_shipping['Shipping_state']}\n {my_shipping['Shipping_zipcode']}\n {my_shipping['Shipping_country']}\n"
+
+            # gather order info
+            full_name = my_shipping['Shipping_full_name']
+            email = my_shipping['Shipping_email']
+            amount = totals
+
+            # create order
+            if request.user.is_authenticated:
+                user = request.user
+            else:
+                user = None
+            create_order = Order(user=user, full_name=full_name, email=email, Shipping_address=shipping_address,
+                                 amount=amount, invoice=my_invoice)
+            create_order.save()
+
+            # add order item
+            order_id = create_order.pk
+            for product in products():
+                product_id = product.id
+                if product.is_sale:
+                    price = product.sale_price
+                else:
+                    price = product.price
+
+                for key, value in quantities().items():
+                    if int(key) == product_id:
+                        quantity = value
+                        create_order_item = OderItem(order_id=order_id, product_id=product_id, user=user,
+                                                     quantity=quantity,
+                                                     price=price)
+                        create_order_item.save()
+
+            # reset Cart after checkout
+            for key in list(request.session.keys()):
+                if key == "session_key":
+                    del request.session[key]
+                    cart = request.session['session_key'] = {}
+                    current_user = UserProfile.objects.filter(user__id=request.user.id)
+                    carted = str(cart)
+                    current_user.update(carted=carted)
+
             return render(request, 'payment/billing.html', {'paypal_form': paypal_form, 'products': products, 'quantities': quantities, 'totals': totals, 'shipping_form': shipping_form, 'billing_form': billing_form})
         else:
             shipping_form = request.POST
