@@ -76,7 +76,7 @@ def billing(request):
 
         #create PayPal button
         paypal_form = PayPalPaymentsForm(initial=paypal_dict)
-        request.session['paypay_info'] = paypal_form
+
 
         if request.user.is_authenticated:
             shipping_form = request.POST
