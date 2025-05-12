@@ -120,7 +120,7 @@ def billing(request):
                         create_order_item.save()
 
 
-            return render(request, 'payment/billing.html', {'paypal_form': paypal_form, 'products': products, 'quantities': quantities, 'totals': totals, 'shipping_form': shipping_form, 'billing_form': billing_form})
+            return render(request, 'payment/billing.html', {'paypal_form': paypal_form, 'products': products, 'quantities': quantities, 'totals': totals, 'shipping_form': shipping_form, 'billing_form': billing_form, 'my_shipping': my_shipping})
         else:
             shipping_form = request.POST
             billing_form = PaymentForm()
@@ -260,22 +260,26 @@ def orders(request, pk):
 
 
 def payment_success(request):
-    my_invoice = request.session.get('my_invoice')
-    paypal_dict = request.session.get('paypal_dict')
-    paypal_info = request.session.get('paypal_info')
+    if request.POST:
 
-    # reset Cart after checkout
-    for key in list(request.session.keys()):
-        if key == "session_key":
-            del request.session[key]
-            cart = request.session['session_key'] = {}
-            if request.user.is_authenticated:
-                current_user = UserProfile.objects.filter(user__id=request.user.id)
-                carted = str(cart)
-                current_user.update(carted=carted)
+        my_paypal = request.POST
+        request.session['my_paypal'] = my_paypal
 
 
-    return render(request, 'payment/payment_success.html', {'my_invoice': my_invoice, 'paypal_dict': paypal_dict, 'paypal_info': paypal_info})
+        paypal_info = request.session.get('my_paypal')
+
+        # reset Cart after checkout
+        for key in list(request.session.keys()):
+            if key == "session_key":
+                del request.session[key]
+                cart = request.session['session_key'] = {}
+                if request.user.is_authenticated:
+                    current_user = UserProfile.objects.filter(user__id=request.user.id)
+                    carted = str(cart)
+                    current_user.update(carted=carted)
+
+
+        return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info})
 
 def payment_failed(request):
     return render(request, 'payment/payment_failed.html', {})
