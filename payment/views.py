@@ -265,8 +265,8 @@ def payment_success(request):
     paypal_info = request.session.get('my_paypal')
 
 
-    # my_order = Order.objects.all(invoice=my_invoice)
-    trans = Order.objects.all()
+    my_invoice = paypal_info.my_invoice
+    trans = Order.objects.get(invoice=my_invoice)
 
     # reset Cart after checkout
     for key in list(request.session.keys()):
