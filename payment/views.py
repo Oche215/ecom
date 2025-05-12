@@ -121,8 +121,6 @@ def billing(request):
                                                      price=price)
                         create_order_item.save()
 
-            request.session['order_id'] = order_id
-
             return render(request, 'payment/billing.html', {'paypal_form': paypal_form, 'products': products, 'quantities': quantities, 'totals': totals, 'shipping_form': shipping_form, 'billing_form': billing_form, 'my_shipping': my_shipping})
         else:
             shipping_form = request.POST
