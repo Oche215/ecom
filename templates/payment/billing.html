@@ -115,8 +115,9 @@
                 </div>
                 <br>
                     <div class="container d-flex justify-content-center">
-                        <a href="{{ paypal_form.render }}">
-                            <img src="{% static 'assets/PayPal-PayNow.png' %}" alt="buy now">
+                        {{ paypal_form.render }}
+                        <a href="">
+                            <img src="{% static 'assets/PayPal-PayNow.png' %}" style="width: 120;" alt="buy now">
                         </a>
 
                     </div>
