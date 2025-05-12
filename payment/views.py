@@ -260,26 +260,24 @@ def orders(request, pk):
 
 
 def payment_success(request):
-    if request.POST:
-
-        my_paypal = request.POST
-        request.session['my_paypal'] = my_paypal
+    my_paypal = request.POST
+    request.session['my_paypal'] = my_paypal
 
 
-        paypal_info = request.session.get('my_paypal')
+    paypal_info = request.session.get('my_paypal')
 
-        # reset Cart after checkout
-        for key in list(request.session.keys()):
-            if key == "session_key":
-                del request.session[key]
-                cart = request.session['session_key'] = {}
-                if request.user.is_authenticated:
-                    current_user = UserProfile.objects.filter(user__id=request.user.id)
-                    carted = str(cart)
-                    current_user.update(carted=carted)
+    # reset Cart after checkout
+    for key in list(request.session.keys()):
+        if key == "session_key":
+            del request.session[key]
+            cart = request.session['session_key'] = {}
+            if request.user.is_authenticated:
+                current_user = UserProfile.objects.filter(user__id=request.user.id)
+                carted = str(cart)
+                current_user.update(carted=carted)
 
 
-        return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info})
+    return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info})
 
 def payment_failed(request):
     return render(request, 'payment/payment_failed.html', {})
