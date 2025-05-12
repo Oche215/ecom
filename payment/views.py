@@ -260,7 +260,7 @@ def orders(request, pk):
 
 
 def payment_success(request):
-    my_paypal = request.POST
+    my_paypal = request.GET
     request.session['my_paypal'] = my_paypal
 
 
