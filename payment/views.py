@@ -262,9 +262,10 @@ def orders(request, pk):
 def payment_success(request):
     my_paypal = request.GET
     request.session['my_paypal'] = my_paypal
-
-
     paypal_info = request.session.get('my_paypal')
+
+    my_invoice = str(uuid.uuid4())
+    my_order = Order.objects.get(invoice=my_invoice)
 
     # reset Cart after checkout
     for key in list(request.session.keys()):
@@ -277,7 +278,7 @@ def payment_success(request):
                 current_user.update(carted=carted)
 
 
-    return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info})
+    return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info, 'my_order': my_order})
 
 def payment_failed(request):
     return render(request, 'payment/payment_failed.html', {})
