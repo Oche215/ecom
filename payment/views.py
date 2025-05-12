@@ -18,6 +18,7 @@ from django.shortcuts import render
 from paypal.standard.forms import PayPalPaymentsForm
 from django.conf import settings
 import uuid #unique user_id for duplicate orders
+from .hooks import
 
 
 # Create your views here.
@@ -104,6 +105,7 @@ def billing(request):
 
             # add order item
             order_id = create_order.pk
+
             for product in products():
                 product_id = product.id
                 if product.is_sale:
@@ -119,6 +121,7 @@ def billing(request):
                                                      price=price)
                         create_order_item.save()
 
+            request.session['order_id'] = order_id
 
             return render(request, 'payment/billing.html', {'paypal_form': paypal_form, 'products': products, 'quantities': quantities, 'totals': totals, 'shipping_form': shipping_form, 'billing_form': billing_form, 'my_shipping': my_shipping})
         else:
@@ -264,8 +267,9 @@ def payment_success(request):
     request.session['my_paypal'] = my_paypal
     paypal_info = request.session.get('my_paypal')
 
-    my_invoice = str(uuid.uuid4())
-    # my_order = Order.objects.filter(invoice=my_invoice)
+    my_invoice = paypal_info['order_id']
+
+    my_order = Order.objects.filter(invoice=my_invoice)
 
     # reset Cart after checkout
     for key in list(request.session.keys()):
@@ -278,7 +282,7 @@ def payment_success(request):
                 current_user.update(carted=carted)
 
 
-    return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info, 'my_invoice': my_invoice})
+    return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info, 'my_order': my_order})
 
 def payment_failed(request):
     return render(request, 'payment/payment_failed.html', {})
