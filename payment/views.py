@@ -76,6 +76,7 @@ def billing(request):
 
         #create PayPal button
         paypal_form = PayPalPaymentsForm(initial=paypal_dict)
+        request.session['paypay_info'] = paypal_form
 
         if request.user.is_authenticated:
             shipping_form = request.POST
@@ -261,6 +262,7 @@ def orders(request, pk):
 def payment_success(request):
     my_invoice = request.session.get('my_invoice')
     paypal_dict = request.session.get('paypal_dict')
+    paypal_info = request.session.get('paypal_info')
 
     # reset Cart after checkout
     for key in list(request.session.keys()):
@@ -273,7 +275,7 @@ def payment_success(request):
                 current_user.update(carted=carted)
 
 
-    return render(request, 'payment/payment_success.html', {'my_invoice': my_invoice, 'paypal_dict': paypal_dict})
+    return render(request, 'payment/payment_success.html', {'my_invoice': my_invoice, 'paypal_dict': paypal_dict, 'paypal_info': paypal_info})
 
 def payment_failed(request):
     return render(request, 'payment/payment_failed.html', {})
