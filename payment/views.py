@@ -267,7 +267,7 @@ def payment_success(request):
     paypal_info = request.session.get('my_paypal')
 
 
-    ipn = PayPalIPN.objects.all()
+    ipn = PayPalIPN.objects.all(payer_id=paypal_info.PayerID)
     ord = Order.objects.all()
 
     # reset Cart after checkout
