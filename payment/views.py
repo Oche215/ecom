@@ -284,7 +284,7 @@ def payment_success(request):
                         current_user.update(carted=carted)
 
 
-            return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info, 'ord': ord, 'x': x})
+            return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info, 'ord': ord, 'x': x, 'ipn': ipn})
 
 def payment_failed(request):
     return render(request, 'payment/payment_failed.html', {})
