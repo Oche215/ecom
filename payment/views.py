@@ -16,7 +16,7 @@ import datetime
 from django.urls import reverse
 from django.shortcuts import render
 from paypal.standard.forms import PayPalPaymentsForm
-from paypal.standard.models import PayPalStandardBase
+from paypal.standard.ipn.models import PayPalIPN
 
 from django.conf import settings
 import uuid #unique user_id for duplicate orders
@@ -267,7 +267,7 @@ def payment_success(request):
     paypal_info = request.session.get('my_paypal')
 
 
-    ipn = PayPalStandardBase.objects.all()
+    ipn = PayPalIPN.objects.all()
     ord = Order.objects.all()
 
     # reset Cart after checkout
