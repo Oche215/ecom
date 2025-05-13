@@ -16,6 +16,8 @@ import datetime
 from django.urls import reverse
 from django.shortcuts import render
 from paypal.standard.forms import PayPalPaymentsForm
+from paypal.standard.models import PayPalStandardBase
+
 from django.conf import settings
 import uuid #unique user_id for duplicate orders
 
@@ -265,8 +267,8 @@ def payment_success(request):
     paypal_info = request.session.get('my_paypal')
 
 
-    my_invoice = paypal_info.my_invoice
-    trans = Order.objects.get(invoice=my_invoice)
+    ipn = PayPalStandardBase.objects.all()
+    ord = Order.objects.all()
 
     # reset Cart after checkout
     for key in list(request.session.keys()):
@@ -279,7 +281,7 @@ def payment_success(request):
                 current_user.update(carted=carted)
 
 
-    return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info, 'trans': trans})
+    return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info, 'ord': ord, 'ipn': ipn})
 
 def payment_failed(request):
     return render(request, 'payment/payment_failed.html', {})
