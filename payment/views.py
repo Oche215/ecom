@@ -270,7 +270,7 @@ def payment_success(request):
         if key == "PayerID":
             x = value
 
-            # ipn = PayPalIPN.objects.all(payer_id=value)
+            ipn = PayPalIPN.objects.filter(payer_id=x)
             ord = Order.objects.all()
 
             # reset Cart after checkout
