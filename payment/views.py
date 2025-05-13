@@ -266,22 +266,24 @@ def payment_success(request):
     request.session['my_paypal'] = my_paypal
     paypal_info = request.session.get('my_paypal')
 
+    for key, value in paypal_info.items():
+        if key == "PayerID":
 
-    ipn = PayPalIPN.objects.all(payer_id=paypal_info.PayerID)
-    ord = Order.objects.all()
+            ipn = PayPalIPN.objects.all(payer_id=value)
+            ord = Order.objects.all()
 
-    # reset Cart after checkout
-    for key in list(request.session.keys()):
-        if key == "session_key":
-            del request.session[key]
-            cart = request.session['session_key'] = {}
-            if request.user.is_authenticated:
-                current_user = UserProfile.objects.filter(user__id=request.user.id)
-                carted = str(cart)
-                current_user.update(carted=carted)
+            # reset Cart after checkout
+            for key in list(request.session.keys()):
+                if key == "session_key":
+                    del request.session[key]
+                    cart = request.session['session_key'] = {}
+                    if request.user.is_authenticated:
+                        current_user = UserProfile.objects.filter(user__id=request.user.id)
+                        carted = str(cart)
+                        current_user.update(carted=carted)
 
 
-    return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info, 'ord': ord, 'ipn': ipn})
+            return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info, 'ord': ord, 'ipn': ipn})
 
 def payment_failed(request):
     return render(request, 'payment/payment_failed.html', {})
