@@ -268,8 +268,9 @@ def payment_success(request):
 
     for key, value in paypal_info.items():
         if key == "PayerID":
+            x = value
 
-            ipn = PayPalIPN.objects.all(payer_id=value)
+            # ipn = PayPalIPN.objects.all(payer_id=value)
             ord = Order.objects.all()
 
             # reset Cart after checkout
@@ -283,7 +284,7 @@ def payment_success(request):
                         current_user.update(carted=carted)
 
 
-            return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info, 'ord': ord, 'ipn': ipn})
+            return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info, 'ord': ord, 'x': x})
 
 def payment_failed(request):
     return render(request, 'payment/payment_failed.html', {})
