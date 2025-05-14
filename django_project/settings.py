@@ -170,5 +170,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #paypal settings
 PAYPAL_TEST = True
 PAYPAL_RECEIVER_EMAIL = 'merchant@lct.com' #business sandbox account
-PAYPAL_BUY_BUTTON_IMAGE = "https://aleph-shopping.up.railway.app/static/assets/buynow.png"
+PAYPAL_BUY_BUTTON_IMAGE = "https://aleph-shopping.up.railway.app/static/assets/PayPal-PayNow.png"
 #'static/assets/PayPal-PayNow.png'
