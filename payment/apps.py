@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+from django.core.signals import request_finished
 
 
 class PaymentConfig(AppConfig):
@@ -7,5 +8,8 @@ class PaymentConfig(AppConfig):
 
     #setup paypay IPN signal
     def ready(self):
-        import payment.hooks
+        # import payment.hooks
+
+        from .hooks import paypal_payment
+        request_finished.connect(paypal_payment)
 

@@ -28,5 +28,9 @@ def paypal_payment(sender, **kwargs):
 
     return redirect('payment_success', (ipn_object,))
 
+# valid_ipn_received.connect(paypal_payment)
+
+
+
 
 
