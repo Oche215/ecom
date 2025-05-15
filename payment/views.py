@@ -268,11 +268,11 @@ def payment_success(request):
     paypal_info = request.session.get('my_paypal')
 
     for key, value in paypal_info.items():
-        if key == "PayerID":
+        if key == "invoice":
             x = value
 
-            ipn = PayPalIPN.objects.filter(payer_id=x)
-            ord = Order.objects.all()
+            ipn = PayPalIPN.objects.filter(invoice=x)
+            ord = Order.objects.filter(invoice=x)
 
             # reset Cart after checkout
             for key in list(request.session.keys()):
