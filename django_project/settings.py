@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'mathfilters',
     'whitenoise.runserver_nostatic',
     'paypal.standard.ipn',
+    'paypal.standard.pdt',
 
 ]
 
@@ -172,3 +173,6 @@ PAYPAL_TEST = True
 PAYPAL_RECEIVER_EMAIL = 'merchant@lct.com' #business sandbox account
 PAYPAL_BUY_BUTTON_IMAGE = "https://aleph-shopping.up.railway.app/static/assets/buynow.png"
 #'static/assets/PayPal-PayNow.png'
+
+PAYPAL_IDENTITY_TOKEN = 'CBERbvTWtCyUll_oz1TcuSlLXA-BRw8vBwbF_Z5CyLvID2DcRbniAhiDZb8'
+

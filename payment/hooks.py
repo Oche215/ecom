@@ -26,7 +26,7 @@ def paypal_payment(sender, **kwargs):
     my_order.paid = True
     my_order.save()
 
-    return redirect('payment_success', (ipn_object,))
+    # return redirect('payment_success', (ipn_object,))
 
 # valid_ipn_received.connect(paypal_payment)
 

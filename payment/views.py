@@ -1,5 +1,6 @@
 from locale import currency
 
+from django.core.signals import request_finished
 from django.shortcuts import render, redirect
 from django.template.context_processors import request
 
