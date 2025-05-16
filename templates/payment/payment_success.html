@@ -18,7 +18,7 @@
                  <div class="text-center text-success">
                      <h1 class="display-4 fw-bolder"> <i class="bi bi-check2-square"></i></h1>
                      <p class="lead fw-normal text-white-50 mb-0">You've successfully placed your order.</p>
-                     <p> <span class="text-body-secondary" ><strong>Order Summary</strong> </span></p>
+                     <p> <span class="text-body-secondary text-black" ><strong>Order Summary</strong> </span></p>
                  </div>
             </div>
 
@@ -98,6 +98,26 @@
 
                     </div>
 
+                    <div class="col-md-12" >
+
+                            <div class="card-footer bg-transparent justify-content-right mb-0">
+
+                                Name: {{ paypal_info.address_name }}<br>
+                                Buyer ID: {{ paypal_info.PayerID }}<br>
+
+                                Email: {{ paypal_info.payer_email }}<br>
+                                Address1: {{ paypal_info.address_street }}<br>
+
+                                Transaction ID: {{ paypal_info.txn_id }}<br>
+                                Currency: {{ paypal_info.mc_currency }}<br>
+
+                                Payment Status: {{ paypal_info.payment_status }}<br>
+                                Item Purchased: {{ paypal_info.item_name }}<br>
+                                Purchase Date: {{ paypal_info.payment_date }}<br>
+
+
+                            </div>
+                        </div>
                     <div class="col-md-12" >
 
                             <div class="card-footer bg-transparent justify-content-right mb-0">
