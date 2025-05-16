@@ -272,7 +272,7 @@ def payment_success(request):
             x = value
 
 
-            order = Order.objects.get(invoice= value)
+            order = Order.objects.all()
             ipn = PayPalIPN.objects.filter(invoice=x)
 
             # reset Cart after checkout
@@ -286,7 +286,7 @@ def payment_success(request):
                         current_user.update(carted=carted)
 
 
-            return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info, 'ord': ord, 'x': x, 'ipn': ipn, 'order': order})
+            return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info, 'x': x, 'ipn': ipn, 'order': order})
 
 def payment_failed(request):
     return render(request, 'payment/payment_failed.html', {})
