@@ -285,6 +285,33 @@
                 {{ord}} <p></p>
                 {{order}}
 
+                 <div class="container d-flex justify-content-center">
+                     <table>
+                         <thead>
+                         <tr>
+                             <th>Item Name</th>
+                             <th>Quantity</th>
+                             <th>Price</th>
+                         </tr>
+                         </thead>
+                         <tbody>
+
+
+                     {% for item in order.orderitem_set.all %}
+                         <tr>
+                             <td>{{ item.product.name }}</td>
+                             <td>{{ item.quantity }}</td>
+                             <td>{{ item.price }}</td>
+                         </tr>
+
+                     {% endfor %}
+                          </tbody>
+                     </table>
+
+
+
+                    </div>
+
 
             </div>
 
