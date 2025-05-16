@@ -285,6 +285,13 @@
                 {{ord}} <p></p>
                 {{order}}
 
+                {% for item in order %}
+                {% if item.invoice == paypal.invoice %}
+                item.pk, item.full_name, item.shipping, item.invoice <br>
+                {% endif %}
+
+                {% endfor %}
+
                  <div class="container d-flex justify-content-center">
                      <table>
                          <thead>
