@@ -18,6 +18,7 @@
                  <div class="text-center text-success">
                      <h1 class="display-4 fw-bolder"> <i class="bi bi-check2-square"></i></h1>
                      <p class="lead fw-normal text-white-50 mb-0">You've successfully placed your order.</p>
+                     <p> <span class="text-body-secondary" ><strong>Order Summary</strong> </span></p>
                  </div>
             </div>
 
@@ -32,7 +33,7 @@
                         <div class="col-md-12 " >
                             <div class="card-footer justify-content-left mb-0">
                               <div class="d-flex justify-content-left mb-0">
-                               <span class="text-body-secondary" ><strong>Order Summary</strong> </span>
+                               <span class="text-body-secondary" ><strong>Invoice: </strong>{{ paypal_info.invoice }} </span>
                               </div>
                             </div>
                         </div>
@@ -46,7 +47,7 @@
                         <div class="col-md-8  ">
                           <div class="card-footer bg-transparent justify-content-left mb-0 ">
                               <div class="d-flex justify-content-left mb-0 align-middle">
-                                  <small class="text-body-secondary " >{{ paypal_info.quantity }}</small>
+                                  <small class="text-body-secondary " >{{ paypal_info.item_name }}</small>
                               </div>
 
                           </div>
@@ -57,27 +58,6 @@
                            <div class="card-footer bg-transparent justify-content-left mb-0 ">
 
                                <span class="text-body-secondary" ><strong>{{ paypal_info.amt }}</strong> </span>
-
-                          </div>
-                        </div>
-
-                    </div>
-                    <div class="row g-0">
-
-                        <div class="col-md-8  ">
-                          <div class="card-footer bg-transparent justify-content-left mb-0 ">
-                              <div class="d-flex justify-content-left mb-0 align-middle">
-                                  <small class="text-body-secondary " >Invoice:</small>
-                              </div>
-
-                          </div>
-                        </div>
-
-
-                        <div class="col-md-4" align="right">
-                           <div class="card-footer bg-transparent justify-content-left mb-0 ">
-
-                               <span class="text-body-secondary" ><strong>{{ paypal_info.invoice }}</strong> </span>
 
                           </div>
                         </div>
@@ -109,7 +89,7 @@
                         <div class="col-md-12 " >
                             <div class="card-footer justify-content-left mb-0">
                               <div class="d-flex justify-content-left mb-0">
-                               <span class="text-body-secondary" ><strong>Invoice Info</strong> </span>
+                               <span class="text-body-secondary" ><strong>Invoice Details</strong> </span>
                               </div>
                             </div>
                         </div>
@@ -141,13 +121,13 @@
 
                     <div class="col-md-12" >
                             <div class="card-footer justify-content-right mb-0">
-                                 <small><a class="btn btn-sm btn-outline-dark" href="{% url 'checkout' %}">Update Shipping</a></small>
+                                 <small><a class="btn btn-sm btn-outline-dark" href="{% url 'home' %}"> Done </a></small>
                             </div>
                         </div>
                 </div>
 
                 <div class="container d-flex justify-content-center">
-                        {{ paypal_form.render }}
+                        {{ paypal_info.invoice }}
 
                     </div>
 
