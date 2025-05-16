@@ -28,7 +28,6 @@
                     <section class="py-5">
             <div class="container col-md-3">
                 <div class="card mb-2 bg-transparent" style="">
-                    {% if products %}
                     <div class="row g-0">
                         <div class="col-md-12 " >
                             <div class="card-footer justify-content-left mb-0">
@@ -41,13 +40,13 @@
 
 
                     </div>
-                        {% for product in paypal_info %}
+                        {% for info in paypal_info %}
                     <div class="row g-0">
 
                         <div class="col-md-8  ">
                           <div class="card-footer bg-transparent justify-content-left mb-0 ">
                               <div class="d-flex justify-content-left mb-0 align-middle">
-                                  <small class="text-body-secondary " >{{ product.name }}</small>
+                                  <small class="text-body-secondary " >{{ product.quantity }}</small>
                               </div>
 
                           </div>
@@ -70,7 +69,7 @@
                         {% endif %}
                          {% endfor %}
                         {% endfor %}
-                    {% endif %}
+
                     <div class="row g-0">
                     <div class="col-md-6" >
                             <div class="card-footer justify-content-right mb-0">
