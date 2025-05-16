@@ -40,20 +40,20 @@
 
 
                     </div>
-                        {% for info in paypal_info %}
+                        {% for key, value in paypal_info.items %}
                     <div class="row g-0">
 
                         <div class="col-md-8  ">
                           <div class="card-footer bg-transparent justify-content-left mb-0 ">
                               <div class="d-flex justify-content-left mb-0 align-middle">
-                                  <small class="text-body-secondary " >{{ product.quantity }}</small>
+                                  <small class="text-body-secondary " >{{ paypal_info.quantity }}</small>
                               </div>
 
                           </div>
                         </div>
 
-                             {% for key, value in quantities.items %}
-                            {% if key == product.id|slugify %}
+
+
 
                         <div class="col-md-4" align="right">
                            <div class="card-footer bg-transparent justify-content-left mb-0 ">
@@ -66,8 +66,8 @@
                         </div>
 
                     </div>
-                        {% endif %}
-                         {% endfor %}
+
+
                         {% endfor %}
 
                     <div class="row g-0">
