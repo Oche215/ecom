@@ -53,12 +53,31 @@
                         </div>
 
 
+                        <div class="col-md-4" align="right">
+                           <div class="card-footer bg-transparent justify-content-left mb-0 ">
+
+                               <span class="text-body-secondary" ><strong>{{ paypal_info.amt }}</strong> </span>
+
+                          </div>
+                        </div>
+
+                    </div>
+                    <div class="row g-0">
+
+                        <div class="col-md-8  ">
+                          <div class="card-footer bg-transparent justify-content-left mb-0 ">
+                              <div class="d-flex justify-content-left mb-0 align-middle">
+                                  <small class="text-body-secondary " >Invoice:</small>
+                              </div>
+
+                          </div>
+                        </div>
 
 
                         <div class="col-md-4" align="right">
                            <div class="card-footer bg-transparent justify-content-left mb-0 ">
 
-                               <span class="text-body-secondary" ><strong>{{ paypal_info.amt }}</strong> </span>
+                               <span class="text-body-secondary" ><strong>{{ paypal_info.invoice }}</strong> </span>
 
                           </div>
                         </div>
@@ -90,7 +109,7 @@
                         <div class="col-md-12 " >
                             <div class="card-footer justify-content-left mb-0">
                               <div class="d-flex justify-content-left mb-0">
-                               <span class="text-body-secondary" ><strong>Shipping Info</strong> </span>
+                               <span class="text-body-secondary" ><strong>Invoice Info</strong> </span>
                               </div>
                             </div>
                         </div>
@@ -103,14 +122,18 @@
 
                             <div class="card-footer bg-transparent justify-content-right mb-0">
 
-                                Name: {{ shipping_form.Shipping_full_name }}<br>
-                                Email: {{ shipping_form.Shipping_email }}<br>
-                                Address1: {{ shipping_form.Shipping_address1 }}<br>
-                                Address2: {{ shipping_form.Shipping_address2 }}<br>
-                                City: {{ shipping_form.Shipping_city }}<br>
-                                State: {{ shipping_form.Shipping_state }}<br>
-                                Zipcode: {{ shipping_form.Shipping_zipcode }}<br>
-                                Country: {{ shipping_form.Shipping_country }}<br>
+                                Name: {{ paypal_info.address_name }}<br>
+                                Buyer ID: {{ paypal_info.PayerID }}<br>
+
+                                Email: {{ paypal_info.payer_email }}<br>
+                                Address1: {{ paypal_info.address_street }}<br>
+
+                                Transaction ID: {{ paypal_info.txn_id }}<br>
+                                Currency: {{ paypal_info.mc_currency }}<br>
+
+                                Payment Status: {{ paypal_info.payment_status }}<br>
+                                Item Purchased: {{ paypal_info.item_name }}<br>
+                                Purchase Date: {{ paypal_info.payment_date }}<br>
 
 
                             </div>
