@@ -308,9 +308,11 @@
 
 
                          <tr>
+                              {% for item in order %}
                              <td>{{ item.OderItem.product.name }}</td>
                              <td>{{ item.OderItem.quantity }}</td>
                              <td>{{ item.OderItem.price }}</td>
+                             {% endfor %}
                          </tr>
 
 
