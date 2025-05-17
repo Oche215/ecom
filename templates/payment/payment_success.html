@@ -279,14 +279,14 @@
                 {{ipn}}<br>
                 {{ord}} <p></p>
                 {{order}}
- {% for item in order %}
-                 {% if item.invoice == paypal_info.invoice %}
+
+
                 <div class="container">
 
 
-
+                {% if item.invoice == paypal_info.invoice %}
                 {{item.pk}}, {{item.full_name}}, {{item.Shipping_address}}, {{item.invoice}} <br>
-
+                 {% endif %}
 
 
 
@@ -318,9 +318,9 @@
 
 
                     </div>
-                {% endif %}
 
-{% endfor %}
+
+
             </div>
 
 
