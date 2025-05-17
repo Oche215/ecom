@@ -286,9 +286,9 @@
                 {{order}}
 
                 {% for item in order %}
-<!--                {% if item.invoice == paypal_info.invoice %}-->
+                {% if item.invoice == paypal_info.invoice %}
                 {{item.pk}}, {{item.full_name}}, {{item.shipping_address}}, {{item.invoice}} <br>
-<!--                {% endif %}-->
+                {% endif %}
 
                 {% endfor %}
 
