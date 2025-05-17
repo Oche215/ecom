@@ -280,12 +280,17 @@
                 {{ord}} <p></p>
                 {{order}}
 
+                 {% if item.invoice == paypal_info.invoice %}
+                <div class="container">
+
 <!--                {% for item in order %}-->
-                {% if item.invoice == paypal_info.invoice %}
-                {{item.pk}}, {{item.full_name}}, {{item.shipping_address}}, {{item.invoice}} <br>
-                {% endif %}
+
+                {{item.pk}}, {{item.full_name}}, {{item.Shipping_address}}, {{item.invoice}} <br>
+
 
 <!--                {% endfor %}-->
+
+                </div>
 
                  <div class="container d-flex justify-content-center">
                      <table>
@@ -299,20 +304,21 @@
                          <tbody>
 
 
-                     {% for item in order.orderitem.all %}
+
                          <tr>
-                             <td>{{ item.product.name }}</td>
-                             <td>{{ item.quantity }}</td>
-                             <td>{{ item.price }}</td>
+                             <td>{{ item.OderItem.product.name }}</td>
+                             <td>{{ item.OderItem.quantity }}</td>
+                             <td>{{ item.OderItem.price }}</td>
                          </tr>
 
-                     {% endfor %}
+
                           </tbody>
                      </table>
 
 
 
                     </div>
+                {% endif %}
 
 
             </div>
