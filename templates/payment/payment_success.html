@@ -47,7 +47,7 @@
                         <div class="col-md-8  ">
                           <div class="card-footer bg-transparent justify-content-left mb-0 ">
                               <div class="d-flex justify-content-left mb-0 align-middle">
-                                  <small class="text-body-secondary " >{{ item.product }}</small>
+                                  <small class="text-body-secondary " >{{ item.product }}</small> (x{{item.quantity}})
                               </div>
 
                           </div>
@@ -57,7 +57,7 @@
                         <div class="col-md-4" align="right">
                            <div class="card-footer bg-transparent justify-content-left mb-0 ">
 
-                               <span class="text-body-secondary" ><strong>{{ item.price }}</strong> </span>
+                               <span class="text-body-secondary" ><strong>{{ item.price|mul:item.quantity }}</strong> </span>
 
                           </div>
                         </div>
