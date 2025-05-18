@@ -306,11 +306,11 @@
 
 
                          <tr>
-                              {% for item in ipn %}
-                             <td>{{ item.OderItem.product.name }}</td>
-                             <td>{{ item.OderItem.quantity }}</td>
-                             <td>{{ item.OderItem.price }}</td>
-                             {% endfor %}
+
+                             <td>{{ order.OderItem.product.name }}</td>
+                             <td>{{ order.OderItem.quantity }}</td>
+                             <td>{{ order.OderItem.price }}</td>
+
                          </tr>
 
 
