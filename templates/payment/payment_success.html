@@ -256,7 +256,7 @@
                         <div class="col-md-8">
                            <div class="card-footer bg-transparent justify-content-left mb-0 ">
 
-                               <span class="text-body-secondary" ><strong>{% paypal_info.payment_date "d-m-Y" %}</strong> </span>
+                               <span class="text-body-secondary" ><strong>{{ paypal_info.payment_date|date:"D d M Y" }}</strong> </span>
 
                           </div>
                         </div>
