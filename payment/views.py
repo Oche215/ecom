@@ -274,7 +274,7 @@ def payment_success(request):
 
             order = Order.objects.get(invoice=x)
             ipn = PayPalIPN.objects.filter(invoice=x)
-            items = order.OrderItem_set.all()
+            items = order.orderitem_set.all()
 
             # reset Cart after checkout
             for key in list(request.session.keys()):
