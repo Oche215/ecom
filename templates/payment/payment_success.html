@@ -284,11 +284,9 @@
 
                 <div class="container">
 
-<!--                    {% for item in order %}-->
-<!--                    {% if item.invoice == paypal_info.invoice %}-->
+
                 {{order.pk}}, {{order.full_name}}, {{order.Shipping_address}}, {{order.invoice}} <br>
-<!--                    {% endif %}-->
-<!--                    {% endfor %}-->
+
 
 
 
@@ -308,7 +306,7 @@
 
 
                          <tr>
-                              {% for item in order %}
+                              {% for item in ipn %}
                              <td>{{ item.OderItem.product.name }}</td>
                              <td>{{ item.OderItem.quantity }}</td>
                              <td>{{ item.OderItem.price }}</td>
