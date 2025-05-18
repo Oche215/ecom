@@ -284,11 +284,11 @@
 
                 <div class="container">
 
-                    {% for item in order %}
+<!--                    {% for item in order %}-->
 <!--                    {% if item.invoice == paypal_info.invoice %}-->
-                {{item.pk}}, {{item.full_name}}, {{item.Shipping_address}}, {{item.invoice}} <br>
+                {{order.pk}}, {{order.full_name}}, {{order.Shipping_address}}, {{order.invoice}} <br>
 <!--                    {% endif %}-->
-                    {% endfor %}
+<!--                    {% endfor %}-->
 
 
 
