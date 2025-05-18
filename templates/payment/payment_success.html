@@ -33,7 +33,7 @@
                         <div class="col-md-12 " >
                             <div class="card-footer justify-content-left mb-0">
                               <div class="d-flex justify-content-left mb-0">
-                                  <span class="text-body-secondary" ><strong>Invoice: </strong><small>{{ paypal_info.invoice }}</small> </span>
+                                  <span class="text-body-secondary" ><strong>Order: </strong><small>{{ order.pk }}</small> </span>
                               </div>
                             </div>
                         </div>
@@ -43,11 +43,11 @@
                     </div>
 
                     <div class="row g-0">
-
+                       {% for item in order_item %}
                         <div class="col-md-8  ">
                           <div class="card-footer bg-transparent justify-content-left mb-0 ">
                               <div class="d-flex justify-content-left mb-0 align-middle">
-                                  <small class="text-body-secondary " >{{ paypal_info.item_name }}</small>
+                                  <small class="text-body-secondary " >{{ item.product }}</small>
                               </div>
 
                           </div>
@@ -57,10 +57,11 @@
                         <div class="col-md-4" align="right">
                            <div class="card-footer bg-transparent justify-content-left mb-0 ">
 
-                               <span class="text-body-secondary" ><strong>{{ paypal_info.amt }}</strong> </span>
+                               <span class="text-body-secondary" ><strong>{{ item.price }}</strong> </span>
 
                           </div>
                         </div>
+                        {% endfor %}
 
                     </div>
 
@@ -84,7 +85,7 @@
                         <div class="col-md-12 " >
                             <div class="card-footer justify-content-left mb-0">
                               <div class="d-flex justify-content-left mb-0">
-                               <span class="text-body-secondary" ><strong>Invoice Details</strong> </span>
+                                  <span class="text-body-secondary" ><strong>Invoice Details</strong><small>{{paypal_info.invoice}}</small></span>
                               </div>
                             </div>
                         </div>
@@ -171,7 +172,7 @@
                         <div class="col-md-8">
                            <div class="card-footer bg-transparent justify-content-left mb-0 ">
 
-                               <span class="text-body-secondary" ><strong>{{ paypal_info.address_street }}</strong> </span>
+                               <span class="text-body-secondary" ><strong>{{order.Shipping_address}}</strong> </span>
 
                           </div>
                         </div>
