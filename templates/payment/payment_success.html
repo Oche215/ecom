@@ -256,7 +256,7 @@
                         <div class="col-md-8">
                            <div class="card-footer bg-transparent justify-content-left mb-0 ">
 
-                               <span class="text-body-secondary" ><strong>{{ paypal_info.payment_date|truncatechars:11 }}</strong> </span>
+                               <span class="text-body-secondary" ><strong>{{ paypal_info.payment_date|date:"Y-m-d" }}</strong> </span>
 
                           </div>
                         </div>
@@ -277,61 +277,9 @@
                     </div>
 
                     <br>
-                <b>IPN:</b> {{ipn}}<br><br>
-                <b>Order:</b> {{order}} <br>
-
-                <p></p>
-
-
-                <div class="container">
-
-
-                {{order.pk}}, {{order.full_name}}, {{order.Shipping_address}}, {{order.invoice}} <br>
-
-
-
-
-                </div>
-
-                 <div class="container d-flex justify-content-center">
-                     <table>
-                         <thead>
-                         <tr>
-                             <th>Item Name</th>
-                             <th>Quantity</th>
-                             <th>Price</th>
-                         </tr>
-                         </thead>
-                         <tbody>
-
-
-
-                         <tr>
-                            {% for item in order_item %}
-                             <td>{{ item.product.name }}</td>
-                             <td>{{ item.quantity }}</td>
-                             <td>{{ item.price }}</td>
-                             {% endfor %}
-
-                         </tr>
-
-
-                          </tbody>
-                     </table>
-
-
-
-                    </div>
-
-
-
             </div>
-
-
-
-        </section>
+                    </section>
                 </div>
-
         </section>
 
     {% endblock %}
