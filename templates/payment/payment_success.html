@@ -109,7 +109,7 @@
                         <div class="col-md-8">
                            <div class="card-footer bg-transparent justify-content-left mb-0 ">
 
-                               <span class="text-body-secondary" ><strong>{{ paypal_info.address_name }}</strong> </span>
+                               <span class="text-body-secondary" ><strong>{{ order.full_name }}</strong> </span>
 
                           </div>
                         </div>
@@ -256,7 +256,7 @@
                         <div class="col-md-8">
                            <div class="card-footer bg-transparent justify-content-left mb-0 ">
 
-                               <span class="text-body-secondary" ><strong>{{ paypal_info.payment_date }}</strong> </span>
+                               <span class="text-body-secondary" ><strong>{{ paypal_info.payment_date[:11] }}</strong> </span>
 
                           </div>
                         </div>
