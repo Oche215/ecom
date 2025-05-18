@@ -306,11 +306,11 @@
 
 
                          <tr>
-                            {% for item in items %}
-                             <td>{{ items.product.name }}</td>
-                             <td>{{ items.quantity }}</td>
-                             <td>{{ Items.price }}</td>
-                             {}
+                            {% for item in order_item %}
+                             <td>{{ item.product.name }}</td>
+                             <td>{{ item.quantity }}</td>
+                             <td>{{ Item.price }}</td>
+                             {% endfor %}
 
                          </tr>
 
