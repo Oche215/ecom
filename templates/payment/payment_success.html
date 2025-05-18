@@ -33,7 +33,7 @@
                         <div class="col-md-12 " >
                             <div class="card-footer justify-content-left mb-0">
                               <div class="d-flex justify-content-left mb-0">
-                                  <span class="text-body-secondary" ><strong>Order: </strong><small>{{ order.pk }}</small> </span>
+                                  <span class="text-body-secondary" ><strong>Order: </strong><small>{{ order }}</small> </span>
                               </div>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                         <div class="col-md-12 " >
                             <div class="card-footer justify-content-left mb-0">
                               <div class="d-flex justify-content-left mb-0">
-                                  <span class="text-body-secondary" ><strong>Invoice Details</strong><small>{{paypal_info.invoice}}</small></span>
+                                  <span class="text-body-secondary" ><strong>Invoice #:</strong><small> {{paypal_info.invoice}}</small></span>
                               </div>
                             </div>
                         </div>
@@ -310,7 +310,7 @@
                             {% for item in order_item %}
                              <td>{{ item.product.name }}</td>
                              <td>{{ item.quantity }}</td>
-                             <td>{{ Item.price }}</td>
+                             <td>{{ item.price }}</td>
                              {% endfor %}
 
                          </tr>
