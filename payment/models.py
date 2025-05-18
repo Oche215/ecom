@@ -29,7 +29,7 @@ class ShippingAddress(models.Model):
 
 # create Order Model
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, )
     full_name = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
     Shipping_address = models.TextField(max_length=1500)
