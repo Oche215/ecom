@@ -45,7 +45,7 @@ class Order(models.Model):
     def __str__(self):
         return f'Order - {str(self.id)}'
 
-#auto add shipping date
+    #auto add shipping date
 @receiver(pre_save, sender=Order)
 def set_shipped_date(sender, instance, **kwargs):
     if instance.pk:
@@ -59,7 +59,7 @@ def set_shipped_date(sender, instance, **kwargs):
 
 # create Order Items Model
 class OderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, blank=True)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, blank=True, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, )
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
