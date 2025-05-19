@@ -101,27 +101,27 @@ def billing(request):
                 user = request.user
             else:
                 user = None
-            create_order = Order(user=user, full_name=full_name, email=email, Shipping_address=shipping_address,
+                create_order = Order(user=user, full_name=full_name, email=email, Shipping_address=shipping_address,
                                  amount=amount, invoice=my_invoice)
-            create_order.save()
+                create_order.save()
 
-            # add order item
-            order_id = create_order.pk
+                # add order item
+                order_id = create_order.pk
 
-            for product in products():
-                product_id = product.id
-                if product.is_sale:
-                    price = product.sale_price
-                else:
-                    price = product.price
+                for product in products():
+                    product_id = product.id
+                    if product.is_sale:
+                        price = product.sale_price
+                    else:
+                        price = product.price
 
-                for key, value in quantities().items():
-                    if int(key) == product_id:
-                        quantity = value
-                        create_order_item = OderItem(order_id=order_id, product_id=product_id, user=user,
-                                                     quantity=quantity,
-                                                     price=price)
-                        create_order_item.save()
+                    for key, value in quantities().items():
+                        if int(key) == product_id:
+                            quantity = value
+                            create_order_item = OderItem(order_id=order_id, product_id=product_id, user=user,
+                                                         quantity=quantity,
+                                                         price=price)
+                            create_order_item.save()
 
             return render(request, 'payment/billing.html', {'paypal_form': paypal_form, 'products': products, 'quantities': quantities, 'totals': totals, 'shipping_form': shipping_form, 'billing_form': billing_form, 'my_shipping': my_shipping})
         else:
