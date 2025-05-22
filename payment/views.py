@@ -262,10 +262,12 @@ def orders(request, pk):
         return redirect('home')
 
 
-def payment_success(request):
+def payment_success(request, value):
     my_paypal = request.GET
     request.session['my_paypal'] = my_paypal
     paypal_info = request.session.get('my_paypal')
+
+
 
     for key, value in paypal_info.items():
         if key == "invoice":
