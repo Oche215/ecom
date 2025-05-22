@@ -15,6 +15,7 @@ class OrderItemInline(admin.StackedInline):
 class OrderAdmin(admin.ModelAdmin):
     model = Order
     readonly_fields = ["date_ordered", "date_shipped"]
+    fields = ['invoice']
     inlines = [OrderItemInline]
 
 #re-register the Order Model
