@@ -267,6 +267,8 @@ def payment_success(request):
     request.session['my_paypal'] = my_paypal
     paypal_info = request.session.get('my_paypal')
 
+    invoice = paypal_info.invoice
+
 
 
     for key, value in paypal_info.items():
@@ -290,7 +292,7 @@ def payment_success(request):
                         current_user.update(carted=carted)
 
 
-            return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info, 'x': x, 'value': value})
+            return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info, 'x': x, 'invoice': invoice, 'value': value})
 
 def payment_failed(request):
     return render(request, 'payment/payment_failed.html', {})
