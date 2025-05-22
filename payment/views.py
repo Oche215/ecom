@@ -262,7 +262,7 @@ def orders(request, pk):
         return redirect('home')
 
 
-def payment_success(request, value):
+def payment_success(request):
     my_paypal = request.GET
     request.session['my_paypal'] = my_paypal
     paypal_info = request.session.get('my_paypal')
