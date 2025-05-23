@@ -272,6 +272,7 @@ def payment_success(request):
 
 
     for key, value in paypal_info.items():
+
         if key == "invoice":
             x = str(value)
 
@@ -292,7 +293,7 @@ def payment_success(request):
                         current_user.update(carted=carted)
 
 
-            return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info, 'x': x, 'invoice': invoice, 'value': value})
+            return render(request, 'payment/payment_success.html', {'paypal_info': paypal_info, 'x': x, 'value': value})
 
 def payment_failed(request):
     return render(request, 'payment/payment_failed.html', {})
