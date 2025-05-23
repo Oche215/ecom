@@ -267,7 +267,7 @@ def payment_success(request):
     request.session['my_paypal'] = my_paypal
     paypal_info = request.session.get('my_paypal')
 
-    invoice = paypal_info.invoice
+    # invoice = paypal_info.invoice
 
 
 
