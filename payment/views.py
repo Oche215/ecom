@@ -269,10 +269,10 @@ def payment_success(request):
 
     for key, value in paypal_info.items():
         if key == 'invoice':
-            x = str(value)
+            x = value
 
             ipn = PayPalIPN.objects.filter(invoice=x)
-            order = Order.objects.filter(invoice=x)
+            order = Order.objects.get(invoice=x)
 
             # # order_item = order.items.all()
             # items = order.orderitem_set.all()
