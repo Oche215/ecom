@@ -267,18 +267,13 @@ def payment_success(request):
     request.session['my_paypal'] = my_paypal
     paypal_info = request.session.get('my_paypal')
 
-    # invoice = paypal_info.invoice
-
-
-
     for key, value in paypal_info.items():
-
-        if key == "invoice":
+        if key == 'invoice':
             x = str(value)
 
-            # ipn = PayPalIPN.objects.filter(invoice=x)
-            # order = Order.objects.filter(invoice=x)
-            #
+            ipn = PayPalIPN.objects.filter(invoice=x)
+            order = Order.objects.filter(invoice=x)
+
             # # order_item = order.items.all()
             # items = order.orderitem_set.all()
 
