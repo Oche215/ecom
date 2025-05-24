@@ -34,9 +34,9 @@
                             <div class="card-footer justify-content-left mb-0">
                               <div class="d-flex justify-content-left mb-0">
                                   {% for o in order %}
-                                    {% for key, value in x %}
+                                    {% for value in x %}
 
-                                  {% if o.invoice == value %}
+                                  {% if o.invoice == value.invoice %}
                                   <span class="text-body-secondary" ><strong>Order: </strong><small>{{ order }}</small> </span>
 
                                   {% endif %}
