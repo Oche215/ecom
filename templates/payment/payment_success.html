@@ -34,13 +34,13 @@
                             <div class="card-footer justify-content-left mb-0">
                               <div class="d-flex justify-content-left mb-0">
                                   {% for o in order %}
-                                    {% for value in x %}
 
-                                  {% if o.invoice == value.invoice %}
+
+                                  {% if o.invoice == x.invoice %}
                                   <span class="text-body-secondary" ><strong>Order: </strong><small>{{ o.id }}</small> </span>
 
                                   {% endif %}
-                                  {% endfor %}
+
                                   {% endfor %}
                               </div>
                             </div>
