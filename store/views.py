@@ -223,3 +223,7 @@ class UserDetail2(DetailView):
 
     model = ShippingAddress
     template_name = 'register/shipping_info.html'
+
+
+def mikvah(request):
+    return render(request, 'mikvah.html', {})
